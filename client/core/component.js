@@ -9,13 +9,23 @@ export class Component {
     this.atrs = atrs
   }
 
-  printOptionsToConsole () {
-    console.log(this.tagName)
-    console.log(this.className)
-    console.log(this.children)
-    console.log(this.event)
-    console.log(this.atrs)
-  }
+  toHTML() {
+    const element = document.createElement(this.tagName)
 
+    element.className = this.className
+
+    if (this.children) element.insertAdjacentHTML("beforeend", this.children)
+    
+    for(const key in this.event){
+      const value = this.event[key]
+      element.addEventListener(key, value)
+    }
+    
+    for(const key in this.atrs){
+      const value = this.atrs[key]
+      element.setAttribute(key, value)
+    }
+    return element
+  }
 
 }

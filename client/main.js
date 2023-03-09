@@ -1,22 +1,42 @@
-import {Component} from "./core/component"
+import {Header} from "./components/header"
+import {Main} from "./components/main/"
+import {Footer} from "./components/footer"
+
 import {render} from "./core/render"
+import {getData} from "./utils/getData"
 
-const app = document.querySelector('#app')
+import "./public/styles/style.css"
+import { Component } from "./core/component"
 
-const root = render(
-  new Component ({
+// let isLoading = true
+const products = []
+
+const greeting = new Component({
   tagName: "header",
-  className: "root",
-  children: `<h2>Logo</h2>`,
-  event: async (e) => {
-    const data = await fetch("http://127.0.0.1:3333")
-    const parsedData = await data.json()
-    console.log(parsedData)
-  },
-  id: 4,
-}))
+  className: "header",
+  children: "<h2>Hello Everyone!!!</h2>"
+}).toHTML()
+
+const header = new Header({
+    tagName: "header",
+    className: "header",
+    children: "<h2>Logo</h2>",
+  }).toHTML()
+
+// const data = getData("http://127.0.0.1:3333/products", products);
+
+const main = new Main ({
+  tagName: "main",
+  className: "main",
+  // children: isLoading ? "...": products,
+}).toHTML()
+  
 
 
+const footer = new Footer({
+    tagName: "footer",
+    className: "footer",
+  }).toHTML()
 
-app.append(root)
-
+render("#app", [header, main, footer])
+render(".header", greeting)
