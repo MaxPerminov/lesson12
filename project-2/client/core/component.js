@@ -8,6 +8,8 @@ export class Component {
     this.event = event
     this.atrs = atrs
     this.text = text  
+
+    return this;
   }
 
   toHTML() {
